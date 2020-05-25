@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Listado</title>
 </head>
 <body>
-
+<table>
+		<thead>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Nit</th>
+			<th>Fecha</th>
+			<th>Importancia</th>
+		</thead>
+		<th:block th:each="importancia row: ${importancias}">
+			<tr>
+				<th th:text="${importancia.c_contribuyente}"></th>
+				<th th:text="${importancia.s_nombre}"></th>
+				<th th:text="${importancia.s_apellido}"></th>
+				<th th:text="${importancia.s_nit}"></th>
+				<th th:text="${#dates.format(contribuyente.f_fecha_ingreso, 'dd/MM/yyyy')}"></th>
+				<th th:text="${importancia.c_importancia}"></th>
+			</tr>
+		</th:block>
+	</table>
+	<br>
+	<form th:action="@{/inicio}">
+		<input type="submit" value="Regresar">
+	</form>
 </body>
 </html>

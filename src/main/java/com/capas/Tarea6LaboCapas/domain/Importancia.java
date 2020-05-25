@@ -1,13 +1,14 @@
 package com.capas.Tarea6LaboCapas.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,14 +16,15 @@ import javax.persistence.Table;
 public class Importancia {
 	
 	@Id
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="c_importancia")
 	@Column(name="c_importancia")
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="importancia_c_importancia_seq")
 	private Integer c_importancia;
 	
 	@Column(name="s_importancia")
 	private String s_importancia;
+	
+    @OneToMany(mappedBy = "importancia", fetch = FetchType.LAZY)
+	private List<Contribuyente> contribuyentes;
 	
 	public Importancia() {};
 	

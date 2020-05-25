@@ -1,5 +1,7 @@
 package com.capas.Tarea6LaboCapas.domain;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -23,8 +27,8 @@ public class Contribuyente {
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="contribuyente_c_contribuyente_seq")
 	private Integer c_contribuyente;
 	
-	@Column(name="c_importancia")
-	@OneToMany(mappedBy="contribuyente", fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "c_importancia")
 	private Integer c_importancia;
 	
 	@NotNull(message="No puede estar vacio")
@@ -46,7 +50,7 @@ public class Contribuyente {
 	@Pattern(regexp="^(?:3[01]|[12][0-9]|0?[1-9])([\\-/.])(0?[1-9]|1[1-2])\\1\\d{4}$", 
 			message="La fecha tiene que seguir el siguiente formato: (dd-mm-yyyy)")
 	@Column(name="f_fecha_ingreso")
-	private Date f_fecha_ingreso;
+	private LocalDate f_fecha_ingreso;
 	
 	public Contribuyente() {};
 	
@@ -80,11 +84,27 @@ public class Contribuyente {
 	public void setS_nit(String s_nit) {
 		this.s_nit = s_nit;
 	}
-	public Date getF_fecha_ingreso() {
+	public LocalDate getF_fecha_ingreso() {
 		return f_fecha_ingreso;
 	}
-	public void setF_fecha_ingreso(Date f_fecha_ingreso) {
+	public void setF_fecha_ingreso(LocalDate f_fecha_ingreso) {
 		this.f_fecha_ingreso = f_fecha_ingreso;
 	}
+	
+	 public String getFechaDelegate(){
+			if(this.f_fecha_ingreso == null){
+				return "";
+			}
+			else{
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				String shortdate = this.f_fecha_ingreso.format(formatter);
+				return shortdate;
+			}
+		}
+	 
+	 @PrePersist
+	    public void prePersist(){
+	        this.f_fecha_ingreso = LocalDate.now();
+	    }
 
 }
