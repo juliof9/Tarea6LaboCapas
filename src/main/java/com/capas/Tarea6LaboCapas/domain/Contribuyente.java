@@ -22,13 +22,13 @@ public class Contribuyente {
 	
 	@Id
 	@Column(name="c_contribuyente")
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="contribuyente_c_contribuyente_seq")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="contribuyente_c_contribuyente_seq")
 	private Integer c_contribuyente;
-	
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "c_importancia")
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="c_importancia")
 	private Importancia c_importancia;
-	
+
 	@NotNull(message="No puede estar vacio")
 	@Size(min=1,max=30, message="No puede contener mas de 30 digitos")
 	@Column(name="s_nombre")

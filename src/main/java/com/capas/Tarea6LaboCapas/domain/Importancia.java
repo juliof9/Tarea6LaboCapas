@@ -17,16 +17,24 @@ public class Importancia {
 	
 	@Id
 	@Column(name="c_importancia")
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="importancia_c_importancia_seq")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="importancia_c_importancia_seq")
 	private Integer c_importancia;
 	
 	@Column(name="s_importancia")
 	private String s_importancia;
 	
-    @OneToMany(mappedBy = "importancia", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "importancia", fetch = FetchType.LAZY)
 	private List<Contribuyente> contribuyentes;
-	
+    
 	public Importancia() {};
+	
+	public List<Contribuyente> getContribuyentes() {
+		return contribuyentes;
+	}
+
+	public void setContribuyentes(List<Contribuyente> contribuyentes) {
+		this.contribuyentes = contribuyentes;
+	}
 	
 	public Integer getC_importancia() {
 		return c_importancia;
