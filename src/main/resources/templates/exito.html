@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Terminado</title>
 </head>
 <body>
-
+<h1>Contribuyente guardado con exito.</h1>
+<form th:action="@{/inicio}">
+	<input type="submit" value="Regresar">
+</form>
 </body>
 </html>

@@ -28,9 +28,9 @@ public class JPAConfiguration {
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
 		em.setJpaProperties(hibernateProperties());
+		
 		return em;
 	}
-	
 
 	@Bean
 	public DataSource dataSource() {
@@ -39,8 +39,7 @@ public class JPAConfiguration {
 		dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/PRODUCTO");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("enizabel71");
-		
-		return dataSource;	
+		return dataSource;
 	}
 	
 	@Bean

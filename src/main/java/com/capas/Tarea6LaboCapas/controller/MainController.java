@@ -42,7 +42,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/formulario")
-	public ModelAndView init1(@Valid @ModelAttribute("contribuyentes") Contribuyente contribuyente, BindingResult result) {
+	public ModelAndView init1(@Valid @ModelAttribute Contribuyente contribuyente, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
 		
 		if(result.hasErrors()) {

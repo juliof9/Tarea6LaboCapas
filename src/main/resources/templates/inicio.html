@@ -21,14 +21,16 @@
 		<input type="text" th:field="*{s_nit}" size="40" placeholder="Nit"><br>
 		<span th:errors ="*{s_nit}" style= "color: #E81505;"></span><br>
 		
-		<label>Importancia</label>
+		<label>Importancia: </label>
         <select th:field="*{importancia.c_importancia}">
-        <option
-        th:each="im : ${importancias}"
+        <option th:each="im : ${importancias}"
             th:value="${im.c_importancia}"
             th:text="${im.s_importancia}"
         />
         </select>
+        
+        <input type="hidden" th:field="*{fechaDelegate}">
+        
 		<input type="submit" value="Agregar"><br>
 		</form>
 		<form method="get" th:action="@{/listado}">

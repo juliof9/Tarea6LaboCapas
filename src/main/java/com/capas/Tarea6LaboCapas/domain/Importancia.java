@@ -23,7 +23,7 @@ public class Importancia {
 	@Column(name="s_importancia")
 	private String s_importancia;
 	
-    @OneToMany(mappedBy = "importancia", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "importancia", fetch = FetchType.EAGER)
 	private List<Contribuyente> contribuyentes;
 	
 	public Importancia() {};
